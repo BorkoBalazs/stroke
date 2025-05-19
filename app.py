@@ -14,7 +14,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 st.set_page_config(page_title="Stroke Prediction", layout="centered")
-st.title("🧠 Stroke Prediction using ML Models")
+st.title("Stroke Prediction using ML Models")
 
 @st.cache_data
 def load_data():
@@ -65,7 +65,7 @@ model.fit(X_train_resampled, y_train_resampled)
 y_pred = model.predict(X_test)
 
 # --- PREDICTION SECTION ---
-st.subheader("🧪 Try Your Own Prediction")
+st.subheader("Try Your Own Prediction")
 
 with st.form("prediction_form"):
     gender = st.selectbox("Gender", ["Male", "Female", "Other"])
@@ -105,4 +105,4 @@ with st.form("prediction_form"):
         scaled_input = scaler.transform(final_input)
         prediction = model.predict(scaled_input)[0]
 
-        st.markdown(f"### 🩺 Prediction: {'🧠 Stroke Risk' if prediction == 1 else '✅ No Stroke Risk'}")
+        st.markdown(f"### Prediction: {'Stroke Risk' if prediction == 1 else 'No Stroke Risk'}")
