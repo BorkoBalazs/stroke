@@ -64,34 +64,6 @@ elif model_name == "XGBoost":
 model.fit(X_train_resampled, y_train_resampled)
 y_pred = model.predict(X_test)
 
-# Show evaluation
-st.subheader("📊 Classification Report")
-report = classification_report(y_test, y_pred, output_dict=True)
-st.dataframe(pd.DataFrame(report).transpose())
-
-st.subheader("🔍 Confusion Matrix")
-cm = confusion_matrix(y_test, y_pred)
-labels = ['No Stroke', 'Stroke']
-fig, ax = plt.subplots()
-sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=labels, yticklabels=labels, ax=ax)
-ax.set_xlabel("Predicted")
-ax.set_ylabel("Actual")
-st.pyplot(fig)
-
-# Feature Importance
-if model_name in ["Logistic Regression", "Random Forest", "Decision Tree", "XGBoost"]:
-    st.subheader("📈 Feature Importances / Coefficients")
-    if hasattr(model, "coef_"):
-        importances = model.coef_[0]
-    else:
-        importances = model.feature_importances_
-    feature_names = df.drop('stroke', axis=1).columns
-    imp_df = pd.DataFrame({
-        'Feature': feature_names,
-        'Importance': importances
-    }).sort_values(by='Importance', key=abs, ascending=False)
-    st.dataframe(imp_df)
-
 # --- PREDICTION SECTION ---
 st.subheader("🧪 Try Your Own Prediction")
 
